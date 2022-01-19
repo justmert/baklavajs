@@ -6,6 +6,8 @@ export interface IViewNode extends INode {
     width: number;
     disablePointerEvents: boolean;
     twoColumn: boolean;
+    renamable: boolean;
+    deletable: boolean;
     customClasses: string;
 }
 

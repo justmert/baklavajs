@@ -189,6 +189,21 @@ export class Editor implements IEditor {
             return false;
         }
 
+        // prevent multi node output ---> one node input
+        if (this.connections.some((c) => c.to === to)) {
+            return false;
+        }
+
+        // prevent one node input --> one node output && one node output --> one node input connection
+        if (this.connections.some((c) => c.to.parent === from.parent && c.from.parent === to.parent)) {
+            return false;
+        }
+
+        // prevent one node output ---> one node multiple inputs
+        if (this.connections.some((c) => c.to.parent === to.parent)) {
+            return false;
+        }
+
         if (this.events.checkConnection.emit({ from, to })) {
             return false;
         }
@@ -261,7 +276,11 @@ export class Editor implements IEditor {
             connections: this.connections.map((c) => ({
                 id: c.id,
                 from: c.from.id,
-                to: c.to.id
+                fromParentId: c.from.parent.id,
+                fromParentType: c.from.parent.type,
+                to: c.to.id,
+                toParentId: c.to.parent.id,
+                toParentType: c.to.parent.type
             }))
         };
         return this.hooks.save.execute(state);

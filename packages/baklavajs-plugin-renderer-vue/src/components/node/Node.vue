@@ -124,10 +124,7 @@ export default class NodeView extends Vue {
         show: false,
         x: 0,
         y: 0,
-        items: [
-            { value: "rename", label: "Rename" },
-            { value: "delete", label: "Delete" },
-        ],
+        items: [] as Array<Object>,
     };
 
     get classes() {
@@ -155,6 +152,12 @@ export default class NodeView extends Vue {
         this.data.events.addOption.addListener(this, () => this.update());
         this.data.events.removeOption.addListener(this, () => this.update());
         this.plugin.hooks.renderNode.execute(this);
+
+        if(this.data.renamable === true)
+            this.contextMenu.items.push({value: "rename", label: "Rename" })
+        
+        if(this.data.deletable === true)
+            this.contextMenu.items.push({value: "delete", label: "Delete" })
     }
 
     updated() {

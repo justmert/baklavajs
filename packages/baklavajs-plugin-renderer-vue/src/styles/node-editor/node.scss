@@ -4,7 +4,7 @@
     color: $color-node-foreground;
     border-radius: $border-radius-node;
     position: absolute;
-    filter: drop-shadow(0 0 3px #000000cc);
+    // filter: drop-shadow(0 0 3px #000000cc);
     transition: box-shadow $visual-transition, filter $visual-transition;
 
     &:hover {
@@ -17,8 +17,7 @@
     }
 
     &.--dragging {
-        filter: drop-shadow(0 0 7px #000000cc);
-
+        // filter: drop-shadow(0 0 7px #000000cc);
         & > .__title {
             cursor: grabbing;
         }

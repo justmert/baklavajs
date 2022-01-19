@@ -79,12 +79,16 @@ export class ViewPlugin implements IPlugin, IViewPlugin {
             n.position = { x: 0, y: 0 };
             n.disablePointerEvents = false;
             n.twoColumn = n.twoColumn || false;
+            n.renamable = n.renamable || false;
+            n.deletable = n.deletable || false;
             n.width = n.width || 200;
             n.customClasses = n.customClasses || "";
             node.hooks.save.tap(this, (state) => {
                 state.position = n.position;
                 state.width = n.width;
                 state.twoColumn = n.twoColumn;
+                state.renamable = n.renamable;
+                state.deletable = n.deletable;
                 state.customClasses = n.customClasses;
                 return state;
             });
@@ -93,6 +97,8 @@ export class ViewPlugin implements IPlugin, IViewPlugin {
                 n.position = state.position || { x: 0, y: 0 };
                 n.width = state.width || 200;
                 n.twoColumn = state.twoColumn || false;
+                n.renamable = state.renamable || false;
+                n.deletable = state.deletable || false;
                 return state;
             });
         });

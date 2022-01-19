@@ -16,7 +16,7 @@ import { VueConstructor } from "vue";
 
 import { Editor, Node, NodeInterface } from "../../baklavajs-core/src";
 import { ViewPlugin } from "../../baklavajs-plugin-renderer-vue/src";
-import { Engine } from "../../baklavajs-plugin-engine/src";
+// import { Engine } from "../../baklavajs-plugin-engine/src";
 import { InterfaceTypePlugin } from "../../baklavajs-plugin-interface-types/src";
 import { OptionPlugin } from "../../baklavajs-plugin-options-vue/src";
 
@@ -40,7 +40,7 @@ import SidebarOption from "./SidebarOption.vue";
 export default class App extends Vue {
     editor: Editor;
     viewPlugin: ViewPlugin;
-    engine: Engine;
+    // engine: Engine;
     nodeInterfaceTypes: InterfaceTypePlugin;
 
     focusState = "blur";
@@ -56,15 +56,15 @@ export default class App extends Vue {
         this.viewPlugin.enableMinimap = true;
         this.editor.use(this.viewPlugin);
 
-        this.engine = new Engine(true);
-        this.engine.events.calculated.addListener(this, (r) => {
-            for (const v of r.values()) {
-                // tslint:disable-next-line:no-console
-                console.log(v);
-            }
-        });
-        this.engine.hooks.gatherCalculationData.tap(this, () => "def");
-        this.editor.use(this.engine);
+        // this.engine = new Engine(true);
+        // this.engine.events.calculated.addListener(this, (r) => {
+        //     for (const v of r.values()) {
+        //         // tslint:disable-next-line:no-console
+        //         console.log(v);
+        //     }
+        // });
+        // this.engine.hooks.gatherCalculationData.tap(this, () => "def");
+        // this.editor.use(this.engine);
 
         this.nodeInterfaceTypes = new InterfaceTypePlugin();
         this.editor.use(this.nodeInterfaceTypes);
